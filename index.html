@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OutfitForge 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <div class="logo">OUTFIT<span>FORGE</span></div>
+    <div class="tagline">describe → visualize → rotate</div>
+  </header>
+
+  <main>
+    <!-- LEFT PANEL: Input -->
+    <section class="panel panel--input">
+      <div class="panel__label">01 / INPUT</div>
+
+      <div class="input-tabs">
+        <button class="tab active" data-tab="describe">Describe</button>
+        <button class="tab" data-tab="upload">Upload Image</button>
+      </div>
+
+      <!-- Describe Tab -->
+      <div class="tab-content active" id="tab-describe">
+        <textarea
+          id="outfit-description"
+          placeholder="e.g. A dark navy blazer over a crisp white oxford shirt, slim-fit black trousers, and brown leather oxford shoes..."
+          rows="6"
+        ></textarea>
+      </div>
+
+      <!-- Upload Tab -->
+      <div class="tab-content" id="tab-upload">
+        <label class="upload-zone" id="upload-zone">
+          <input type="file" id="image-upload" accept="image/*" hidden />
+          <div class="upload-icon">↑</div>
+          <div class="upload-text">Drop image or click to browse</div>
+          <div class="upload-sub">JPG, PNG, WEBP supported</div>
+          <img id="preview-img" src="" alt="" hidden />
+        </label>
+      </div>
+
+      <button class="btn-generate" id="btn-generate">
+        <span class="btn-text">Generate Outfit</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <!-- Outfit Summary Card -->
+      <div class="outfit-summary" id="outfit-summary" hidden>
+        <div class="summary-label">PARSED OUTFIT</div>
+        <div class="summary-items" id="summary-items"></div>
+      </div>
+
+      <div class="error-msg" id="error-msg" hidden></div>
+    </section>
+
+    <!-- RIGHT PANEL: 3D Viewer -->
+    <section class="panel panel--viewer">
+      <div class="panel__label">02 / VIEWER</div>
+      <div class="viewer-hint" id="viewer-hint">← Generate an outfit to dress the mannequin</div>
+      <canvas id="three-canvas"></canvas>
+
+      <div class="viewer-controls">
+        <div class="ctrl-hint">🖱 Drag to rotate · Scroll to zoom</div>
+        <div class="viewer-actions">
+          <button class="btn-ctrl" id="btn-reset-cam">Reset Camera</button>
+          <button class="btn-ctrl" id="btn-wireframe">Wireframe</button>
+        </div>
+      </div>
+
+      <div class="loading-overlay" id="loading-overlay" hidden>
+        <div class="spinner"></div>
+        <div class="loading-text">Parsing outfit with AI...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- OrbitControls (inline-compatible build) -->
+  <script>
+    // Inline OrbitControls for r128
+    // Sourced from three.js examples, adapted for module-less use
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
